@@ -18,6 +18,6 @@ public class CarService {
     }
 
     public List<Car> getCars() {
-        return carRepository.fetchAllCars();
+        return carRepository.listAll();
     }
 }

@@ -1,54 +1,41 @@
 package com.ctw.car.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
-public class Car {
 
-    private UUID id;
-    private String model;
-    private String brand;
-    private EngineType engineType;
+@EqualsAndHashCode(callSuper = true)
+@Data // getter, setter, required args constructor
+@NoArgsConstructor // removing empty constructor
+@AllArgsConstructor // removing this.id = id inside constructor
+@Entity
+@Table(name = "T_CAR")
+@Builder
+public class Car extends PanacheEntityBase {
 
-    public Car() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID")
+    public UUID id;
 
-    }
+    @Column(name = "BRAND", nullable = false)
+    public String brand;
 
-    public Car(UUID id, String brand, String model, EngineType engineType) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.engineType = engineType;
-    }
+    @Column(name = "MODEL", nullable = false)
+    public String model;
 
-    public UUID getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ENGINE_TYPE", nullable = false)
+    public EngineType engineType;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    @Column(name = "CREATED_AT", updatable = false, nullable = false)
+    public LocalDateTime createdAt;
 
-    public EngineType getEngineType() {
-        return engineType;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setEngineType(EngineType engineType) {
-        this.engineType = engineType;
-    }
+    @Column(name = "CREATED_BY", updatable = false)
+    public String createdBy;
 }
