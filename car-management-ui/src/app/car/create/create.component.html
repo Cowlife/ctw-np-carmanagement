@@ -1,1 +1,15 @@
-<p>create works!</p>
+<h2>Car Creation Menu</h2>
+
+<div style="align-content: center;">
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label" [(ngModel)]="brand_value" autocomplete="off" />
+    <label for="on_label">Brand</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label2" [(ngModel)]="model_value" autocomplete="off" />
+    <label for="on_label2">Model</label>
+  </p-floatlabel>
+  <p-select [options]="cars" [(ngModel)]="engine" optionLabel="name" placeholder="Select an Engine Type" class="w-full md:w-56" />
+</div>
+
+<p-button icon="pi pi-plus" (onClick)="createCarElement()" label="Create New Car" severity="success" [outlined]="true" />

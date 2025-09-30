@@ -3,4 +3,5 @@ export interface Car {
     brand: string,
     model: string,
     engineType: string
+    createdAt: string
 }

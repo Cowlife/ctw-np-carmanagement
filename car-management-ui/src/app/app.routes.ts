@@ -1,14 +1,22 @@
-import { Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import { IndexComponent } from './car/index/index.component'
 import { ViewComponent } from './car/view/view.component'
 import { CreateComponent } from './car/create/create.component'
 import { EditComponent } from './car/edit/edit.component'
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
 
 export const routes: Routes = [
-    { path: '', component: IndexComponent },
-    { path: 'car/index', component: IndexComponent },
-    { path: 'car/:carId/view', component: ViewComponent },
-    { path: 'car/create', component: CreateComponent },
-    { path: 'car/:carId/edit', component: EditComponent}
+    {
+      path: '',
+      loadChildren: () => import('./car/car.module').then(m => m.CarModule),
+    }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes), CommonModule],
+  exports: [RouterModule]
+})
+
+export class AppRoutingModule{}

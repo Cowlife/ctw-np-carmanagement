@@ -29,6 +29,8 @@ public class Car extends PanacheEntityBase {
     @Column(name = "MODEL", nullable = false)
     public String model;
 
+
+
     @Enumerated(EnumType.STRING)
     @Column(name = "ENGINE_TYPE", nullable = false)
     public EngineType engineType;
@@ -38,4 +40,8 @@ public class Car extends PanacheEntityBase {
 
     @Column(name = "CREATED_BY", updatable = false)
     public String createdBy;
+
+
+
+
 }

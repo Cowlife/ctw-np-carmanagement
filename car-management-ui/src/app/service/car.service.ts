@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {v4 as uuidv4} from 'uuid';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Car } from '../model/car';
+import {Router, RouterModule} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarService {
 
@@ -19,7 +20,7 @@ export class CarService {
     })
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   /**
    * Write code on Method
@@ -27,22 +28,28 @@ export class CarService {
    * @return response()
    */
   getAll(): Observable<any> {
-  
-    return this.httpClient.get(this.apiURL + '/car')
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    return this.httpClient.get(this.apiURL + '/cars').pipe(catchError(this.errorHandler))
   }
 
-  /** 
+  createCarElement(car: Car) {
+    console.log(car)
+    this.httpClient.post<Car>(this.apiURL + `/cars`, car).pipe(catchError(this.errorHandler))
+  }
+
+
+
+  // Logic to change pages, put [] in order to recognize string
+  changePage(url: any){
+    this.router.navigate([url]).then(r => {});
+  }
+
+  /**
    * Write code on Method
    *
    * @return response()
    */
   errorHandler(error:any) {
-    let errorMessage = '';
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    return throwError(errorMessage);
+    return throwError(() => `Error Code: ${error.status}\nMessage: ${error.message}`);
   }
+
 }
