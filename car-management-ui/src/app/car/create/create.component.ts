@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {FloatLabel} from "primeng/floatlabel";
 import {InputText} from "primeng/inputtext";
 import {Button} from "primeng/button";
 import {CarService} from "../../service/car.service";
-import {CarModule} from "../car.module";
-import {Car} from "../../model/car";
+import {Car, EngineType} from "../../model/car";
 import {Select} from "primeng/select";
+import {Checkbox} from "primeng/checkbox";
+import {ColorPicker} from "primeng/colorpicker";
 
 @Component({
   selector: 'app-create',
@@ -16,35 +17,47 @@ import {Select} from "primeng/select";
     FloatLabel,
     InputText,
     Button,
-    Select
+    Select,
+    Checkbox,
+    ColorPicker
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
 
-  brand_value: any;
-  model_value: any;
+  brand_value: string = '';
+  model_value: string = '';
   engine: any | undefined; // not value to access the value of select
 
-  cars: any[] | undefined;
-  car_to_insert: Car = ({} as any) as Car
+  engine_enum: any[] | undefined;
+  car_to_insert: Car = {} as Car
+  autonomy_value: boolean = false;
+  color_value: string = '#000000';
+  seats_value: number = 2;
+  license_plate_value: string = '';
   constructor(public carService: CarService) { }
 
   createCarElement(){
-    this.car_to_insert.model = this.model_value
     this.car_to_insert.brand = this.brand_value
+    this.car_to_insert.model = this.model_value
     this.car_to_insert.engineType = this.engine.value
-    this.car_to_insert.createdAt = "2024-09-26 21:09:31.880154 +00:00"
+    this.car_to_insert.createdAt = "2024-09-26T21:09:03.892"
+    this.car_to_insert.createdBy = 'system_user'
+    this.car_to_insert.seats = Number(this.seats_value)
+    this.car_to_insert.licensePlate = this.license_plate_value
+    this.car_to_insert.autonomy = this.autonomy_value
+    this.car_to_insert.color = this.color_value
+    this.car_to_insert.image = 'RandomImgTest'
     this.carService.createCarElement(this.car_to_insert)
   }
 
   ngOnInit() {
-    this.cars = [
-      { name: 'Bev', value: 'BEV' },
-      { name: 'Phev', value: 'PHEV' },
-      { name: 'Diesel', value: 'DIESEL' },
-      { name: 'Gasoline', value: 'GASOLINE' },
+    this.engine_enum = [
+      { name: 'Bev', value: EngineType.BEV },
+      { name: 'Phev', value: EngineType.PHEV },
+      { name: 'Diesel', value: EngineType.DIESEL },
+      { name: 'Gasoline', value: EngineType.GASOLINE },
     ];
   }
 

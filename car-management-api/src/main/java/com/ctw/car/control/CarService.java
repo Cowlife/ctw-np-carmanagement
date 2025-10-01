@@ -6,11 +6,14 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.find;
 
 @Dependent
 public class CarService {
+
     private final CarRepository carRepository;
 
     @Inject
@@ -22,17 +25,11 @@ public class CarService {
         return carRepository.listAll();
     }
 
-    public void addCar(Car car){
-        try {
-            carRepository.persist(car);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
+    public void addCar(Car car){  // DONE
+        carRepository.persist(car);
     }
 
-    public void deleteCar(Long id){
+    public void deleteCar(UUID id){ //DONE
         Car entity = Car.findById(id);
         if(entity == null) {
             throw new NotFoundException();
@@ -40,7 +37,7 @@ public class CarService {
         entity.delete();
     }
 
-    public void updateCar(Long id, Car car){
+    public void updateCar(UUID id, Car car){
         Car entity = Car.findById(id);
         if(entity == null) {
             throw new NotFoundException();
@@ -52,9 +49,15 @@ public class CarService {
         entity.createdBy = car.createdBy;
         entity.engineType = car.engineType;
         entity.model = car.model;
+        entity.autonomy = car.autonomy;
+        entity.image = car.image;
+        entity.color = car.color;
+        entity.seats = car.seats;
     }
 
-    public Car findCar(String name){
-        return find("name", name).firstResult();
+    public Car findCarID(UUID id){
+        Optional<Car> optional_found = Car.findByIdOptional(id);
+        return optional_found.orElseThrow(NotFoundException::new);
     }
+
 }

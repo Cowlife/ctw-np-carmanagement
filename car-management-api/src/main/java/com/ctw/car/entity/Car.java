@@ -1,6 +1,7 @@
 package com.ctw.car.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,31 +15,45 @@ import java.util.UUID;
 @NoArgsConstructor // removing empty constructor
 @AllArgsConstructor // removing this.id = id inside constructor
 @Entity
-@Table(name = "T_CAR")
+@Table(name = "t_car")
 @Builder
 public class Car extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "ID")
+    @Column(name = "id")
     public UUID id;
 
-    @Column(name = "BRAND", nullable = false)
-    public String brand;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "brand", nullable = false)
+    public BrandName brand;
 
-    @Column(name = "MODEL", nullable = false)
+    @Column(name = "model", nullable = false)
     public String model;
 
+    @Column(name = "license_plate", nullable = false)
+    public String licensePlate;
 
+    @Column(name = "color")
+    public String color;
+
+    @Column(name="image")
+    public String image;
+
+    @Column(name = "seats")
+    public Integer seats;
+
+    @Column(name= "autonomy")
+    public boolean autonomy;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ENGINE_TYPE", nullable = false)
+    @Column(name = "engine_type", nullable = false)
     public EngineType engineType;
 
-    @Column(name = "CREATED_AT", updatable = false, nullable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     public LocalDateTime createdAt;
 
-    @Column(name = "CREATED_BY", updatable = false)
+    @Column(name = "created_by", updatable = false)
     public String createdBy;
 
 

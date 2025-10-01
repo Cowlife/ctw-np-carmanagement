@@ -1,1 +1,13 @@
-<p>view works!</p>
+<h3 style="text-align: center;">CAR INFORMATION</h3>
+
+<div style="align-content: center">
+  <h4>{{carService.current_car.createdAt}}</h4>
+  <h4>{{carService.current_car.createdBy}}</h4>
+  <h4>{{carService.current_car.model}}</h4>
+  <h4>{{carService.current_car.brand}}</h4>
+  <h4>{{carService.current_car.autonomy}}</h4>
+  <h4>{{carService.current_car.engineType}}</h4>
+  <h4>{{carService.current_car.licensePlate}}</h4>
+  <h4>{{carService.current_car.seats}}</h4>
+  <p-button (onClick)="carService.changePage('', carService.current_car)" label="Edit" severity="success" />
+</div>

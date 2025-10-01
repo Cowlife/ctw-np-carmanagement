@@ -1,29 +1,31 @@
 import { Component } from '@angular/core';
+import {Button} from "primeng/button";
 import {FloatLabel} from "primeng/floatlabel";
 import {FormsModule} from "@angular/forms";
 import {InputText} from "primeng/inputtext";
-import {Button} from "primeng/button";
 import {CarService} from "../../service/car.service";
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
-  imports: [
-    FloatLabel,
-    FormsModule,
-    InputText,
-    Button
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    imports: [
+        Button,
+        FloatLabel,
+        FormsModule,
+        InputText
+    ],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
-  password_value: any;
-  email_value: any;
+export class RegisterComponent {
+  license_value: any;
+  contact_value: any;
+  name_value: any;
+
 
   constructor(public carService: CarService) { }
 
-  accessPage() {
+  registerToPage() {
     this.carService.changePage('car/index')
   }
 }

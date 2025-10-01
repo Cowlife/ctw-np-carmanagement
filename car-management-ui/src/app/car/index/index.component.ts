@@ -13,13 +13,14 @@ import {MultiSelect} from "primeng/multiselect";
 import {Select} from "primeng/select";
 import {Tag} from "primeng/tag";
 import {InputText} from "primeng/inputtext";
-import {Toast} from "primeng/toast";
+import {Toast, ToastModule} from "primeng/toast";
 import {ConfirmDialog} from "primeng/confirmdialog";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, RouterModule, TableModule, IconField, InputIcon, MultiSelect, FormsModule, Select, Tag, InputText, Button, Toast, ConfirmDialog],
+  imports: [CommonModule, RouterModule, TableModule, IconField, InputIcon, MultiSelect, FormsModule, Select, Tag, InputText, Button],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })

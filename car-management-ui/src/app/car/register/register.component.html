@@ -1,0 +1,17 @@
+<h3 style="text-align: center;">LOGIN PAGE</h3>
+
+<div style="align-content: center">
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label" [(ngModel)]="name_value" autocomplete="off" />
+    <label for="on_label">Brand</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label2" [(ngModel)]="contact_value" autocomplete="off" />
+    <label for="on_label2">Model</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label3" [(ngModel)]="license_value" autocomplete="off" />
+    <label for="on_label3">Model</label>
+  </p-floatlabel>
+  <p-button (onClick)="registerToPage()" label="Login" severity="success" />
+</div>

@@ -1,6 +1,7 @@
 <div class="container" style="text-align: center; margin-top: 10px">
     <h1>Car Management</h1>
-    <p-button icon="pi pi-plus" (onClick)="carService.changePage('car/create')" label="Create New Car" severity="success" [outlined]="true" />
+    <p-button icon="pi pi-plus" (onClick)="carService.changePage('car/create')" label="Create New Car" severity="success"/>
+    <p-button (onClick)="carService.changePage('')" label="Logout" severity="danger"/>
 </div>
 
 <!-- Below table PrimeNG -->
@@ -8,8 +9,8 @@
   #dt2
   [value]="cars"
   dataKey="id"
-  [rows]="10"
-  [rowsPerPageOptions]="[10, 25, 50]"
+  [rows]="1"
+  [rowsPerPageOptions]="[1, 2, 5]"
   [loading]="loading"
   [columns]="cols"
   [paginator]="true"
@@ -61,12 +62,10 @@
       <td>
         {{car.engineType}}
       </td>
-      <td>
-        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/view')" label="View" severity="info" [outlined]="true" />
-        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/edit')" label="Edit" severity="info" [outlined]="true" />
-        <!--    <p-toast/>
-        <p-confirm-dialog />-->
-        <p-button icon="pi pi-trash" label="Delete" severity="danger" [outlined]="true" />
+      <td style="padding-left: 0; padding-right: 0">
+        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/view',car)" label="View" severity="info" />
+        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/edit',car)" label="Edit" severity="info" />
+        <p-button icon="pi pi-trash" (onClick)="carService.delete_without_toast(car)" label="Delete" severity="danger" />
       </td>
     </tr>
   </ng-template>

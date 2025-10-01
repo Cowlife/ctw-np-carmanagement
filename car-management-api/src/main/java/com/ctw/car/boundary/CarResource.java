@@ -10,7 +10,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Path("/cars")
 @ApplicationScoped
@@ -35,13 +38,13 @@ public class CarResource {
     @Transactional
     public Response create(Car car) {
         this.carService.addCar(car);
-        return Response.created(URI.create("/cars/" + car.id)).build();
+        return Response.created(URI.create("/cars")).build();
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response update(@PathParam("id") Long id, Car car) {
+    public Response update(@PathParam("id") UUID id, Car car) {
         this.carService.updateCar(id, car);
         return Response.status(200).entity(car).build();
     }
@@ -49,14 +52,15 @@ public class CarResource {
     @DELETE
     @Path("/{id}")
     @Transactional
-    public void delete(@PathParam("id") Long id) {
+    public void delete(@PathParam("id") UUID id) {
+        System.out.println(id);
         this.carService.deleteCar(id);
     }
 
     @GET
-    @Path("/search/{name}")
-    public Car search(@PathParam("name") String name) {
-        return this.carService.findCar(name);
+    @Path("/search/{id}")
+    public Car search(@PathParam("id") UUID id) {
+        return this.carService.findCarID(id);
     }
 
 }

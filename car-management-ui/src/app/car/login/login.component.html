@@ -1,1 +1,13 @@
-<p>login works!</p>
+<h3 style="text-align: center;">LOGIN PAGE</h3>
+
+<div>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label" [(ngModel)]="email_value" autocomplete="off" />
+    <label style="margin: auto" for="on_label">Brand</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label2" [(ngModel)]="password_value" autocomplete="off" />
+    <label for="on_label2">Model</label>
+  </p-floatlabel>
+  <p-button (onClick)="accessPage()" label="Login" severity="success" [outlined]="true" />
+</div>
