@@ -1,13 +1,15 @@
 <div class="container" style="text-align: center; margin-top: 10px">
     <h1>Car Management</h1>
-    <p-button icon="pi pi-plus" (onClick)="carService.changePage('car/create')" label="Create New Car" severity="success"/>
+    <p-button icon="pi pi-plus" *ngIf="personService.current_user.role == RoleName.admin"
+              (onClick)="carService.changePage('car/create')"
+              label="Create New Car" severity="success"/>
     <p-button (onClick)="carService.changePage('')" label="Logout" severity="danger"/>
 </div>
 
 <!-- Below table PrimeNG -->
 <p-table
   #dt2
-  [value]="cars"
+  [value]="carService.cars"
   dataKey="id"
   [rows]="1"
   [rowsPerPageOptions]="[1, 2, 5]"
@@ -41,10 +43,34 @@
       <th>
         <p-columnFilter
           type="text"
-          field="name"
-          placeholder="Search by name"
-          ariaLabel="Filter Name"
+          field="id"
+          placeholder="Search by id"
+          [matchModeOptions]="matchModeOptions"
         ></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="brand"
+          placeholder="Search by brand"
+          [matchModeOptions]="matchModeOptions"/>
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="model"
+          placeholder="Search by model"
+          [matchModeOptions]="matchModeOptions"/>
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="engineType"
+          placeholder="Search by engine type"
+          [matchModeOptions]="matchModeOptions"/>
+      </th>
+      <th>
+
       </th>
     </tr>
   </ng-template>
@@ -62,10 +88,14 @@
       <td>
         {{car.engineType}}
       </td>
-      <td style="padding-left: 0; padding-right: 0">
+      <td style="padding-left: 0; padding-right: 0" *ngIf="personService.current_user.role == RoleName.admin">
         <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/view',car)" label="View" severity="info" />
         <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/edit',car)" label="Edit" severity="info" />
         <p-button icon="pi pi-trash" (onClick)="carService.delete_without_toast(car)" label="Delete" severity="danger" />
+      </td>
+      <td style="padding-left: 0; padding-right: 0" *ngIf="personService.current_user.role == RoleName.user">
+        <p-button icon="pi pi-cart-arrow-down" (onClick)="carService.changePage('car/' + car.id + '/to_reserve',car)" label="Reserve" severity="success" />
+        <p-button icon="pi pi-list" (onClick)="carService.changePage('car/' + car.id + '/list_reserve',car)" label="View List" severity="info" />
       </td>
     </tr>
   </ng-template>

@@ -1,9 +1,8 @@
-import {Observable} from "rxjs";
 import {UUID} from "node:crypto";
 
 export interface Car {
     id: UUID,
-    brand: string,
+    brand: BrandName,
     model: string,
     licensePlate: string;
     color: string;
@@ -22,3 +21,9 @@ export enum EngineType {
   DIESEL = 'DIESEL', // ICE/Diesel
 }
 
+export enum BrandName {
+  BMW = "BMW",
+  TOYOTA = "TOYOTA",
+  FORD = "FORD",
+  HONDA = "HONDA",
+}

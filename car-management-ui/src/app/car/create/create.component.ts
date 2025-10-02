@@ -29,7 +29,8 @@ export class CreateComponent {
   brand_value: string = '';
   model_value: string = '';
   engine: any | undefined; // not value to access the value of select
-
+  brand: any | undefined;
+  brand_enum: any[] | undefined;
   engine_enum: any[] | undefined;
   car_to_insert: Car = {} as Car
   autonomy_value: boolean = false;
@@ -39,7 +40,7 @@ export class CreateComponent {
   constructor(public carService: CarService) { }
 
   createCarElement(){
-    this.car_to_insert.brand = this.brand_value
+    this.car_to_insert.brand = this.brand.value
     this.car_to_insert.model = this.model_value
     this.car_to_insert.engineType = this.engine.value
     this.car_to_insert.createdAt = "2024-09-26T21:09:03.892"
@@ -53,6 +54,12 @@ export class CreateComponent {
   }
 
   ngOnInit() {
+    this.brand_enum = [
+      { name: 'BMW', value: 'BMW' },
+      { name: 'Toyota', value: 'TOYOTA' },
+      { name: 'Ford', value: 'FORD' },
+      { name: 'Honda', value: 'HONDA' },
+    ];
     this.engine_enum = [
       { name: 'Bev', value: EngineType.BEV },
       { name: 'Phev', value: EngineType.PHEV },

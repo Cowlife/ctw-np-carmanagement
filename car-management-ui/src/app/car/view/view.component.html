@@ -1,13 +1,14 @@
 <h3 style="text-align: center;">CAR INFORMATION</h3>
 
 <div style="align-content: center">
-  <h4>{{carService.current_car.createdAt}}</h4>
-  <h4>{{carService.current_car.createdBy}}</h4>
-  <h4>{{carService.current_car.model}}</h4>
-  <h4>{{carService.current_car.brand}}</h4>
-  <h4>{{carService.current_car.autonomy}}</h4>
-  <h4>{{carService.current_car.engineType}}</h4>
-  <h4>{{carService.current_car.licensePlate}}</h4>
-  <h4>{{carService.current_car.seats}}</h4>
-  <p-button (onClick)="carService.changePage('', carService.current_car)" label="Edit" severity="success" />
+  <h4>Creation Data: {{carService.current_car.createdAt}}</h4>
+  <h4>Created By: {{carService.current_car.createdBy}}</h4>
+  <h4>Car Model: {{carService.current_car.model}}</h4>
+  <h4>Car Brand: {{carService.current_car.brand}}</h4>
+  <h4>Is it Autonomous: {{carService.current_car.autonomy}}</h4>
+  <h4>Engine Type: {{carService.current_car.engineType}}</h4>
+  <h4>License Plate: {{carService.current_car.licensePlate}}</h4>
+  <h4>Number of Seats: {{carService.current_car.seats}}</h4>
+  <p-button (onClick)="carService.changePage('car/' + carService.current_car.id + '/edit', carService.current_car)" label="Edit" severity="info" />
+  <p-button (onClick)="carService.changePage('car/index')" label="Back" severity="danger"/>
 </div>

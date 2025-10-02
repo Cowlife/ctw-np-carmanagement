@@ -1,38 +1,42 @@
 import { Component } from '@angular/core';
 import {Button} from "primeng/button";
+import {Checkbox} from "primeng/checkbox";
+import {ColorPicker} from "primeng/colorpicker";
 import {FloatLabel} from "primeng/floatlabel";
-import {FormsModule} from "@angular/forms";
 import {InputText} from "primeng/inputtext";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {Select} from "primeng/select";
 import {CarService} from "../../service/car.service";
 import {DatePicker} from "primeng/datepicker";
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-reserve-page',
   standalone: true,
   imports: [
     Button,
+    Checkbox,
+    ColorPicker,
     FloatLabel,
-    FormsModule,
     InputText,
+    ReactiveFormsModule,
+    Select,
+    FormsModule,
     DatePicker
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  templateUrl: './reserve-page.component.html',
+  styleUrl: './reserve-page.component.css'
 })
-export class RegisterComponent {
-  license_value: any;
-  contact_value: any;
+export class ReservePageComponent {
   name_value: any;
+  contact_value: any;
+  license_plate_value: any;
   date: Date | undefined;
-  minDate: Date | undefined;
-  maxDate: Date | undefined
-
+  minDate: Date | undefined ;
+  maxDate: Date | undefined ;
+  license_value: any;
 
   constructor(public carService: CarService) { }
 
-  registerToPage() {
-    this.carService.changePage('car/index')
-  }
 
   ngOnInit(){
     let today = new Date();
@@ -45,5 +49,11 @@ export class RegisterComponent {
     this.maxDate.setDate(this.maxDate.getDate() + 4)
     this.maxDate.setMonth(month);
     this.maxDate.setFullYear(year);
+
+
+  }
+
+  reserveCarElement() {
+
   }
 }

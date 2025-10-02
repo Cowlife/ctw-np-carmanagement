@@ -7,7 +7,7 @@
 
     <include file="sql/01-grant-user-privileges.sql" relativeToChangelogFile="true"/>
     <include file="sql/02-create-tables.sql" relativeToChangelogFile="true"/>
-    <include file="sql/03-populate-car-table.sql" relativeToChangelogFile="true"/>
-    <include file="sql/04-create-columns.sql" relativeToChangelogFile="true"/>
-    <include file="sql/05-create-and-insert-user-tables.sql" relativeToChangelogFile="true"/>
+    <include file="sql/03-populate-car-and-reserve-tables.sql" relativeToChangelogFile="true"/>
+    <include file="sql/04-change-car-columns.sql" relativeToChangelogFile="true"/>
+    <include file="sql/05-populate-user-tables.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

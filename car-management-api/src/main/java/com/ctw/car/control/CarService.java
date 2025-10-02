@@ -25,7 +25,7 @@ public class CarService {
         return carRepository.listAll();
     }
 
-    public void addCar(Car car){  // DONE
+    public void addCar(Car car){
         carRepository.persist(car);
     }
 
@@ -59,5 +59,6 @@ public class CarService {
         Optional<Car> optional_found = Car.findByIdOptional(id);
         return optional_found.orElseThrow(NotFoundException::new);
     }
+
 
 }

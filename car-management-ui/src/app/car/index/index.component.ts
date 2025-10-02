@@ -15,7 +15,9 @@ import {Tag} from "primeng/tag";
 import {InputText} from "primeng/inputtext";
 import {Toast, ToastModule} from "primeng/toast";
 import {ConfirmDialog} from "primeng/confirmdialog";
-import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmationService, FilterMatchMode, MessageService, SelectItem} from "primeng/api";
+import {PersonService} from "../../service/person.service";
+import {RoleName} from "../../model/person";
 
 @Component({
   selector: 'app-index',
@@ -26,21 +28,17 @@ import {ConfirmationService, MessageService} from "primeng/api";
 })
 export class IndexComponent {
 
-  cars: Car[] = []
   loading: boolean = false;
   cols!: any[];
 
 
-  constructor(public carService: CarService) { }
 
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
+  constructor(public carService: CarService,
+              protected personService: PersonService,) { }
+
   ngOnInit(): void {
-    this.carService.getAll().subscribe((data: Car[])=>{
-      this.cars = data;
+    this.carService.getAllCars().subscribe((data: Car[])=>{
+      this.carService.cars = data;
     });
     this.cols = [
       { field: 'id', header: 'Id' },
@@ -49,32 +47,16 @@ export class IndexComponent {
       { field: 'engineType', header: 'Engine Type' },
       { field: '', header: 'Action' },
     ];
+    this.matchModeOptions = [
+      { label: 'Starts With', value: FilterMatchMode.STARTS_WITH },
+      { label: 'Contains', value: FilterMatchMode.CONTAINS},
+      { label: 'Not Contains', value: FilterMatchMode.NOT_CONTAINS},
+      { label: 'Ends With',value: FilterMatchMode.ENDS_WITH},
+      { label: 'Equals',value: FilterMatchMode.EQUALS},
+      { label: 'Not Equals',value: FilterMatchMode.NOT_EQUALS}
+    ];
   }
 
-
-  /*confirm_delete(event: Event) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Do you want to delete this record?',
-      header: 'Danger Zone',
-      icon: 'pi pi-info-circle',
-      rejectLabel: 'Cancel',
-      rejectButtonProps: {
-        label: 'Cancel',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptButtonProps: {
-        label: 'Delete',
-        severity: 'danger',
-      },
-
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record successfully deleted.' });
-      },
-      reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected the deletion of component.' });
-      },
-    });
-  }*/
+  protected readonly RoleName = RoleName;
+  matchModeOptions: SelectItem[] = [];
 }

@@ -1,10 +1,8 @@
 <h2>Car Creation Menu</h2>
 
 <div style="align-content: center;">
-  <p-floatlabel variant="on">
-    <input pInputText id="on_label" [(ngModel)]="brand_value" autocomplete="off" />
-    <label for="on_label">Brand</label>
-  </p-floatlabel>
+  <p-select [options]="brand_enum" [(ngModel)]="brand"
+            optionLabel="name" placeholder="Select a Brand" class="w-full md:w-56" />
   <p-floatlabel variant="on">
     <input pInputText id="on_label2" [(ngModel)]="model_value" autocomplete="off" />
     <label for="on_label2">Model</label>

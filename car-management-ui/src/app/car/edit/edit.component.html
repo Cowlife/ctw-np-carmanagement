@@ -1,17 +1,33 @@
 <h2>Car Editing Menu</h2>
 
 <div style="align-content: center;">
-  <p-floatlabel variant="on">
-    <input pInputText id="on_label" [(ngModel)]="brand_value" autocomplete="off" />
-    <label for="on_label">Brand</label>
-  </p-floatlabel>
+  <p-select [options]="brand_enum" [(ngModel)]="brand"
+            optionLabel="name" placeholder="Select a Brand" class="w-full md:w-56" />
   <p-floatlabel variant="on">
     <input pInputText id="on_label2" [(ngModel)]="model_value" autocomplete="off" />
     <label for="on_label2">Model</label>
   </p-floatlabel>
-  <p-select [options]="cars" [(ngModel)]="engine" optionLabel="name" placeholder="Select an Engine Type" class="w-full md:w-56" />
+  <p-select [options]="engine_enum" [(ngModel)]="engine"
+            optionLabel="name" placeholder="Select an Engine Type" class="w-full md:w-56" />
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label3" [(ngModel)]="seats_value" autocomplete="off" />
+    <label for="on_label3">Seats</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label5" [(ngModel)]="license_plate_value" autocomplete="off" />
+    <label for="on_label5">License Plate</label>
+  </p-floatlabel>
+  <div>
+    <p-checkbox [(ngModel)]="autonomy_value" id="ny" [binary]="true"/>
+    <label for="ny" class="ml-2">Autonomy</label>
+  </div>
+  <div>
+    <p-color-picker [(ngModel)]="color_value" />
+    <span>Color of Vehicle</span>
+  </div>
+
 </div>
 
-<p-button icon="pi pi-plus" (onClick)="createCarElement()" label="Create New Car" severity="success" [outlined]="true" />
+<p-button icon="pi pi-plus" (onClick)="changeCarElement()" label="Create New Car" severity="success" [outlined]="true" />
 
-<p-button (onClick)="carService.changePage('car/index')" label="Back" severity="success"/>
+<p-button (onClick)="carService.changePage('car/index')" label="Back" severity="danger"/>

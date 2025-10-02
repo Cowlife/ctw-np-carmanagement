@@ -1,4 +1,4 @@
-<h3 style="text-align: center;">Register PAGE</h3>
+<h2>Reserve Page Menu</h2>
 
 <p-date-picker [(ngModel)]="date" [minDate]="minDate"
                [maxDate]="maxDate" [readonlyInput]="true" />
@@ -16,5 +16,7 @@
     <input pInputText id="on_label3" [(ngModel)]="license_value" autocomplete="off" />
     <label for="on_label3">License</label>
   </p-floatlabel>
-  <p-button (onClick)="registerToPage()" label="Login" severity="success" />
+  <p-button icon="pi pi-cart-plus" (onClick)="reserveCarElement()" label="Reserve Car" severity="success" />
+  <p-button (onClick)="carService.changePage('car/index')" label="Back" severity="danger" [outlined]="true"/>
+
 </div>

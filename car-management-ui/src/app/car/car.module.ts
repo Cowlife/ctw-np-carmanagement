@@ -7,6 +7,8 @@ import {CreateComponent} from "./create/create.component";
 import {EditComponent} from "./edit/edit.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {ReservePageComponent} from "./reserve-page/reserve-page.component";
+import {ReserveListPageComponent} from "./reserve-list-page/reserve-list-page.component";
 
 const car_routes: Routes = [
   { path: '', component: LoginComponent},
@@ -14,7 +16,9 @@ const car_routes: Routes = [
   { path: 'car/index', component: IndexComponent},
   { path: 'car/:carId/view', component: ViewComponent },
   { path: 'car/create', component: CreateComponent },
-  { path: 'car/:carId/edit', component: EditComponent}
+  { path: 'car/:carId/edit', component: EditComponent},
+  { path: 'car/:carId/to_reserve', component: ReservePageComponent},
+  { path: 'car/:carId/list_reserve', component: ReserveListPageComponent}
 ]
 
 @NgModule({
