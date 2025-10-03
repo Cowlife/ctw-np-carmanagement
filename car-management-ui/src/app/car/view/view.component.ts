@@ -4,6 +4,8 @@ import {FloatLabel} from "primeng/floatlabel";
 import {FormsModule} from "@angular/forms";
 import {InputText} from "primeng/inputtext";
 import {CarService} from "../../service/car.service";
+import {TableModule} from "primeng/table";
+import {Car} from "../../model/car";
 
 @Component({
   selector: 'app-view',
@@ -12,7 +14,8 @@ import {CarService} from "../../service/car.service";
     Button,
     FloatLabel,
     FormsModule,
-    InputText
+    InputText,
+    TableModule
   ],
   templateUrl: './view.component.html',
   styleUrl: './view.component.css'
@@ -20,10 +23,12 @@ import {CarService} from "../../service/car.service";
 export class ViewComponent {
 
 
+  current_car: Car[] = [];
+
   constructor(public carService: CarService) { }
 
   ngOnInit(){
-
+    this.current_car.push(this.carService.current_car)
   }
 
 }

@@ -4,6 +4,7 @@ td p-button{
 
 tr th{
   text-align: center;
+  min-width: 300px;
 }
 
 tr td{

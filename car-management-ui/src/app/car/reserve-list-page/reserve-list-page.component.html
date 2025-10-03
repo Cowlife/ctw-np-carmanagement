@@ -1,1 +1,105 @@
-<p>reserve-list-page works!</p>
+<h1>Reserve List Page</h1>
+
+<p-table
+  #dt2
+  [value]="reserve_response_object"
+  dataKey="id"
+  [rows]="1"
+  [rowsPerPageOptions]="[1, 2, 5]"
+  [loading]="false"
+  [columns]="cols"
+  [paginator]="true"
+  [globalFilterFields]="['id', 'carLicensePlate', 'userPhone', 'pickDate', 'dropDate']"
+  [tableStyle]="{ 'min-width': '75rem' }"
+  [scrollable]="true"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <p-iconfield iconPosition="left" class="ml-auto">
+        <p-inputicon>
+          <i class="pi pi-search"></i>
+        </p-inputicon>
+        <input
+          pInputText
+          type="text"
+          (input)="dt2.filterGlobal($event.target, 'contains')"
+          placeholder="Search keyword"
+        />
+      </p-iconfield>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" style="min-width:300px">{{ col.header }}</th>
+    </tr>
+    <tr>
+      <th pSortableColumn="id">
+        <p-columnFilter
+          type="text"
+          field="id"
+          placeholder="Search by id"
+          [matchModeOptions]="matchModeOptions_text"
+        ></p-columnFilter>
+        <p-sortIcon field="id" />
+      </th>
+      <th pSortableColumn="carLicensePlate">
+        <p-columnFilter
+          type="text"
+          field="carLicensePlate"
+          placeholder="Search by License Plate"
+          [matchModeOptions]="matchModeOptions_text"/>
+        <p-sortIcon field="carLicensePlate" />
+      </th>
+      <th pSortableColumn="userPhone">
+        <p-columnFilter
+          type="text"
+          field="userPhone"
+          placeholder="Search by User's Phone"
+          [matchModeOptions]="matchModeOptions_text"/>
+        <p-sortIcon field="userPhone" />
+      </th>
+      <th  pSortableColumn="pickDate">
+        <p-columnFilter
+          type="text"
+          field="pickDate"
+          placeholder="Search by pick Date"
+          [matchModeOptions]="matchModeOptions_text"/>
+        <p-sortIcon field="pickDate" />
+      </th>
+      <th  pSortableColumn="dropDate">
+        <p-columnFilter
+          type="text"
+          field="dropDate"
+          placeholder="Search by drop Date"
+          [matchModeOptions]="matchModeOptions_text"/>
+        <p-sortIcon field="dropDate" />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-reserve>
+    <tr>
+      <td>
+        {{reserve.id}}
+      </td>
+      <td>
+        {{reserve.carLicensePlate}}
+      </td>
+      <td>
+        {{reserve.userPhone}}
+      </td>
+      <td>
+        {{reserve.pickDate}}
+      </td>
+      <td>
+        {{reserve.dropDate}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5">No reserves found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-button (onClick)="carService.changePage('car/index')" label="Back" severity="danger"/>

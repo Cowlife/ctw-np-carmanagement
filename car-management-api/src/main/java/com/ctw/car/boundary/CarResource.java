@@ -1,7 +1,9 @@
 package com.ctw.car.boundary;
 
 import com.ctw.car.control.CarService;
+import com.ctw.car.control.ReserveService;
 import com.ctw.car.entity.Car;
+import com.ctw.car.entity.Reserve;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,10 +24,12 @@ import java.util.UUID;
 public class CarResource {
 
     private final CarService carService;
+    private final ReserveService reserveService;
 
     @Inject
-    public CarResource(final CarService carService) {
+    public CarResource(final CarService carService, ReserveService reserveService) {
         this.carService = carService;
+        this.reserveService = reserveService;
     }
 
     @GET
@@ -53,8 +57,12 @@ public class CarResource {
     @Path("/{id}")
     @Transactional
     public void delete(@PathParam("id") UUID id) {
-        System.out.println(id);
-        this.carService.deleteCar(id);
+        Car car = this.carService.findCarID(id);
+        List<Reserve> reserves = this.reserveService.getReserves(car.licensePlate);
+        for (Reserve rev: reserves){
+            this.reserveService.deleteReserveByID(rev.id);
+        }
+        this.carService.deleteCar(car.id);
     }
 
     @GET

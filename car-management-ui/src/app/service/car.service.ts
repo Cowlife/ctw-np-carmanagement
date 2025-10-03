@@ -5,6 +5,7 @@ import {Car} from '../model/car';
 import {Router} from "@angular/router";
 import {PersonService} from "./person.service";
 import {Person} from "../model/person";
+import {ReserveService} from "./reserve.service";
 
 
 @Injectable({
@@ -35,6 +36,8 @@ export class CarService {
   }
 
   constructor(private httpClient: HttpClient,
+              private reserveService: ReserveService,
+              private personService: PersonService,
               private router: Router) { }
 
 
@@ -50,7 +53,7 @@ export class CarService {
         error: error => this._alertString = error.toString()
       })
     this.cars.push(car)
-    setTimeout(() => {alert(this._alertString)}, 100);
+    setTimeout(() => {alert(this._alertString)}, 500);
   }
 
   changeCarElement(car: Car) {
@@ -71,7 +74,7 @@ export class CarService {
       error: error => this._alertString = error.toString(),
     })
     this.cars = this.cars.filter(car => car !== car_to_delete)
-    setTimeout(() => {alert(this._alertString)}, 100);
+    setTimeout(() => {alert(this._alertString)}, 500);
   }
 
   changePage(url: any, carToPersist?: Car){
@@ -82,5 +85,7 @@ export class CarService {
   errorHandler(error:any) {
     return throwError(() => `Error Code: ${error.status}\nMessage: ${error.message}`);
   }
+
+
 
 }

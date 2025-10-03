@@ -40,17 +40,15 @@ export class LoginComponent {
           const cond1 = this.email_value == person_response_object.email;
           const cond2 = this.password_value == person_response_object.password;
           cond1 && cond2 ?
-            this.mainTransition(person_response_object) :
+            this.personService.mainTransition(this.carService, '/car/index', person_response_object) :
             setTimeout(() => {alert("Wrong password/email.")}, 500);
         },
         error: error => setTimeout(() => {alert("Account not found.")}, 500)
       })
-
   }
 
-    mainTransition(person_response_object: Person){
-      this.personService.current_user = person_response_object
-      this.carService.changePage('/car/index')
-    }
+  registerPage(){
+    this.carService.changePage('car/register')
+  }
 
 }

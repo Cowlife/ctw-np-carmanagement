@@ -25,8 +25,8 @@ public class Reserve extends PanacheEntityBase{
 
     @Column(name = "car_license_plate", nullable = false)
     public String carLicensePlate;
-    @Column(name = "user_email", nullable = false)
-    public String userEmail;
+    @Column(name = "user_phone", nullable = false)
+    public String userPhone;
 
     @Column(name = "pick_date", updatable = false, nullable = false)
     public LocalDateTime pickDate;

@@ -19,4 +19,9 @@ export class PersonService {
 
   constructor() { }
 
+  mainTransition(carService: CarService, url = '',person_response_object?: Person){
+    this.current_user = person_response_object ? person_response_object : {} as Person
+    carService.changePage(url)
+  }
+
 }

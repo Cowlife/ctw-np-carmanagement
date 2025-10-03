@@ -18,6 +18,7 @@ import {ConfirmDialog} from "primeng/confirmdialog";
 import {ConfirmationService, FilterMatchMode, MessageService, SelectItem} from "primeng/api";
 import {PersonService} from "../../service/person.service";
 import {RoleName} from "../../model/person";
+import {ReserveService} from "../../service/reserve.service";
 
 @Component({
   selector: 'app-index',
@@ -34,7 +35,7 @@ export class IndexComponent {
 
 
   constructor(public carService: CarService,
-              protected personService: PersonService,) { }
+              protected personService: PersonService) { }
 
   ngOnInit(): void {
     this.carService.getAllCars().subscribe((data: Car[])=>{

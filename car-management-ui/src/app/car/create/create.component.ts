@@ -40,17 +40,24 @@ export class CreateComponent {
   constructor(public carService: CarService) { }
 
   createCarElement(){
-    this.car_to_insert.brand = this.brand.value
-    this.car_to_insert.model = this.model_value
-    this.car_to_insert.engineType = this.engine.value
-    this.car_to_insert.createdAt = "2024-09-26T21:09:03.892"
-    this.car_to_insert.createdBy = 'system_user'
-    this.car_to_insert.seats = Number(this.seats_value)
-    this.car_to_insert.licensePlate = this.license_plate_value
-    this.car_to_insert.autonomy = this.autonomy_value
-    this.car_to_insert.color = this.color_value
-    this.car_to_insert.image = 'RandomImgTest'
-    this.carService.createCarElement(this.car_to_insert)
+
+    try{
+      this.car_to_insert.brand = this.brand.value
+      this.car_to_insert.model = this.model_value
+      this.car_to_insert.engineType = this.engine.value
+      this.car_to_insert.createdAt = "2024-09-26T21:09:03.892"
+      this.car_to_insert.createdBy = 'system_user'
+      this.car_to_insert.seats = Number(this.seats_value)
+      this.car_to_insert.licensePlate = this.license_plate_value
+      this.car_to_insert.autonomy = this.autonomy_value
+      this.car_to_insert.color = this.color_value
+      this.car_to_insert.image = 'RandomImgTest'
+      this.carService.createCarElement(this.car_to_insert)
+      this.carService.changePage('car/index')
+    }
+    catch (e) {
+      setTimeout(() => {alert("Please fill all elements.")}, 500);
+    }
   }
 
   ngOnInit() {

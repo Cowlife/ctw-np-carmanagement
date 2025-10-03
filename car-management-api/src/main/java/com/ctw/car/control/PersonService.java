@@ -28,5 +28,7 @@ public class PersonService {
         return Person.find("email", email).firstResult();
     }
 
-
+    public void addPerson(Person person) {
+        personRepository.persist(person);
+    }
 }

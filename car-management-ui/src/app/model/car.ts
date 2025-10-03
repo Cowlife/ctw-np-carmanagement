@@ -15,10 +15,10 @@ export interface Car {
 }
 
 export enum EngineType {
-  BEV = 'BEV', // Electric
-  PHEV = 'PHEV', // Plugin hybrid
-  GASOLINE = 'GASOLINE', // ICE/Gasoline
-  DIESEL = 'DIESEL', // ICE/Diesel
+  BEV = 'BEV',
+  PHEV = 'PHEV',
+  GASOLINE = 'GASOLINE',
+  DIESEL = 'DIESEL',
 }
 
 export enum BrandName {

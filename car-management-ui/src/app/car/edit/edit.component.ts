@@ -43,17 +43,24 @@ export class EditComponent {
   constructor(public carService: CarService) { }
 
   changeCarElement(){
-    this.car_to_change.brand = this.brand.value
-    this.car_to_change.model = this.model_value
-    this.car_to_change.engineType = this.engine.value
-    this.car_to_change.createdAt = "2024-09-26T21:09:03.892"
-    this.car_to_change.createdBy = 'system_user'
-    this.car_to_change.seats = Number(this.seats_value)
-    this.car_to_change.licensePlate = this.license_plate_value
-    this.car_to_change.autonomy = this.autonomy_value
-    this.car_to_change.color = this.color_value
-    this.car_to_change.image = 'RandomImgTest'
-    this.carService.changeCarElement(this.car_to_change)
+    try {
+      this.car_to_change.brand = this.brand.value
+      this.car_to_change.model = this.model_value
+      this.car_to_change.engineType = this.engine.value
+      this.car_to_change.createdAt = "2024-09-26T21:09:03.892"
+      this.car_to_change.createdBy = 'system_user'
+      this.car_to_change.seats = Number(this.seats_value)
+      this.car_to_change.licensePlate = this.license_plate_value
+      this.car_to_change.autonomy = this.autonomy_value
+      this.car_to_change.color = this.color_value
+      this.car_to_change.image = 'RandomImgTest'
+      this.carService.changeCarElement(this.car_to_change)
+      this.carService.changePage('car/index')
+    }
+    catch (e) {
+      setTimeout(() => {alert("Please fill all elements.")}, 500);
+    }
+
   }
 
   ngOnInit() {

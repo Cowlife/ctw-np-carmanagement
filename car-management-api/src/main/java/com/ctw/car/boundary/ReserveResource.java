@@ -29,7 +29,7 @@ public class ReserveResource {
 
     @GET
     public Response getReserves(@QueryParam("car_license_plate") String car_license_plate) {
-        List<Reserve> reserves = this.reserveService.getReserves();
+        List<Reserve> reserves = this.reserveService.getReserves(car_license_plate);
         return Response.status(200).entity(reserves).build();
     }
 
@@ -41,24 +41,24 @@ public class ReserveResource {
     }
 
     @PUT
-    @Path("/{car_license_plate}")
+    @Path("/{id}")
     @Transactional
-    public Response update(@PathParam("car_license_plate") String car_license_plate, Reserve reserve) {
-        this.reserveService.updateReserve(car_license_plate, reserve);
+    public Response update(@PathParam("id") UUID id, Reserve reserve) {
+        this.reserveService.updateReserve(id, reserve);
         return Response.status(200).entity(reserve).build();
     }
 
     @DELETE
-    @Path("/{car_license_plate}")
+    @Path("/{id}")
     @Transactional
-    public void delete(@PathParam("car_license_plate") String car_license_plate) {
-        this.reserveService.deleteReserve(car_license_plate);
+    public void deletebyID(@PathParam("id") UUID id) {
+        this.reserveService.deleteReserveByID(id);
     }
 
     @GET
-    @Path("/search/{car_license_plate}")
-    public Reserve search(@PathParam("car_license_plate") String car_license_plate) {
-        return this.reserveService.findServicePlate(car_license_plate);
+    @Path("/search/{id}")
+    public Reserve searchByID(@PathParam("id") UUID id) {
+        return this.reserveService.findServicePlateByID(id);
     }
 
 

@@ -1,16 +1,27 @@
 <h2>Reserve Page Menu</h2>
 
-<p-date-picker [(ngModel)]="date" [minDate]="minDate"
-               [maxDate]="maxDate" [readonlyInput]="true" />
 
+<p-floatlabel variant="on">
+  <p-date-picker inputId="calendar-24h" [(ngModel)]="PickUpTime" [showTime]="true"
+                 [minDate]="minDate" (onSelect)="defineLimitDates($event)"
+                 [hourFormat]= 'String(24)' [showButtonBar]="true"
+                 (onClearClick)="defineLimitDates($event.value, true)"  />
+  <label for="on_label">Time to Pick UP Car</label>
+</p-floatlabel>
+<p-floatlabel variant="on">
+  <p-date-picker inputId="calendar-24h" [(ngModel)]="DropOffTime" [showTime]="true"
+                 [minDate]="minDate" [maxDate]="maxDate" [showButtonBar]="true"
+                 [hourFormat]= 'String(24)' [disabled]="enabler"/>
+  <label for="on_label">Drop Off Car</label>
+</p-floatlabel>
 <div style="align-content: center">
   <p-floatlabel variant="on">
     <input pInputText id="on_label" [(ngModel)]="name_value" autocomplete="off" />
-    <label for="on_label">Brand</label>
+    <label for="on_label">Name</label>
   </p-floatlabel>
   <p-floatlabel variant="on">
-    <input pInputText id="on_label2" [(ngModel)]="contact_value" autocomplete="off" />
-    <label for="on_label2">Model</label>
+    <p-inputNumber inputId="on_label" [(ngModel)]="contact_value" [maxlength]="9"/>
+    <label for="on_label">Contact Number</label>
   </p-floatlabel>
   <p-floatlabel variant="on">
     <input pInputText id="on_label3" [(ngModel)]="license_value" autocomplete="off" />

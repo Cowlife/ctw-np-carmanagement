@@ -3,20 +3,20 @@
     <p-button icon="pi pi-plus" *ngIf="personService.current_user.role == RoleName.admin"
               (onClick)="carService.changePage('car/create')"
               label="Create New Car" severity="success"/>
-    <p-button (onClick)="carService.changePage('')" label="Logout" severity="danger"/>
+    <p-button (onClick)="personService.mainTransition(carService)" label="Logout" severity="danger"/>
 </div>
 
-<!-- Below table PrimeNG -->
 <p-table
   #dt2
   [value]="carService.cars"
   dataKey="id"
+  stripedRows="true"
   [rows]="1"
   [rowsPerPageOptions]="[1, 2, 5]"
   [loading]="loading"
   [columns]="cols"
   [paginator]="true"
-  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+  [globalFilterFields]="['id', 'brand', 'model', 'engineType']"
   [tableStyle]="{ 'min-width': '75rem' }"
   [scrollable]="true"
 >
@@ -40,34 +40,38 @@
       <th *ngFor="let col of columns" style="min-width:300px">{{ col.header }}</th>
     </tr>
     <tr>
-      <th>
+      <th pSortableColumn="id">
         <p-columnFilter
           type="text"
           field="id"
           placeholder="Search by id"
           [matchModeOptions]="matchModeOptions"
         ></p-columnFilter>
+        <p-sortIcon field="id" />
       </th>
-      <th>
+      <th pSortableColumn="brand">
         <p-columnFilter
           type="text"
           field="brand"
           placeholder="Search by brand"
           [matchModeOptions]="matchModeOptions"/>
+        <p-sortIcon field="brand" />
       </th>
-      <th>
+      <th pSortableColumn="model">
         <p-columnFilter
           type="text"
           field="model"
           placeholder="Search by model"
           [matchModeOptions]="matchModeOptions"/>
+        <p-sortIcon field="model" />
       </th>
-      <th>
+      <th  pSortableColumn="engineType">
         <p-columnFilter
           type="text"
           field="engineType"
           placeholder="Search by engine type"
           [matchModeOptions]="matchModeOptions"/>
+        <p-sortIcon field="engineType" />
       </th>
       <th>
 
@@ -89,8 +93,8 @@
         {{car.engineType}}
       </td>
       <td style="padding-left: 0; padding-right: 0" *ngIf="personService.current_user.role == RoleName.admin">
-        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/view',car)" label="View" severity="info" />
-        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/edit',car)" label="Edit" severity="info" />
+        <p-button icon="pi pi-search" (onClick)="carService.changePage('car/' + car.id + '/view',car)" label="View" severity="contrast" />
+        <p-button icon="pi pi-file-edit" (onClick)="carService.changePage('car/' + car.id + '/edit',car)" label="Edit" severity="info" />
         <p-button icon="pi pi-trash" (onClick)="carService.delete_without_toast(car)" label="Delete" severity="danger" />
       </td>
       <td style="padding-left: 0; padding-right: 0" *ngIf="personService.current_user.role == RoleName.user">
