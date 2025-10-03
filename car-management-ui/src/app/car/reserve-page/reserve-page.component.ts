@@ -101,8 +101,6 @@ export class ReservePageComponent {
       this.maxDate.setFullYear(date.getFullYear());
       this.pickupSelected = this.minDate;
       this.dropTimeSelected = this.maxDate;
-      console.log(this.pickupSelected)
-      console.log(this.dropTimeSelected)
       if (friday_cond){
         this.maxDate.setHours(8)
         this.maxDate.setMinutes(0)
